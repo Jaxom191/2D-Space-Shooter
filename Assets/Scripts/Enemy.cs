@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        StartCoroutine(EnemyShoot());
         _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         m_Collider = GetComponent<Collider2D>();
@@ -24,6 +23,8 @@ public class Enemy : MonoBehaviour
 
         m_Collider.enabled = true;
         _destroyed = false;
+        StartCoroutine(EnemyShoot());
+      
     }
 
     // Update is called once per frame
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator EnemyShoot()
     {
-        if (gameObject.activeInHierarchy && _destroyed == !true)
+        if (gameObject.activeInHierarchy == true && _destroyed == false)
         {
             yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
             GameObject laser1 = PoolManager.Instance.GetPooledObject("Enemy_Laser");

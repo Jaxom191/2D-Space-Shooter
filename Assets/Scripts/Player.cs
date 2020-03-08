@@ -93,7 +93,10 @@ public class Player : MonoBehaviour
                     tripleShotLaser.transform.position = new Vector2(transform.position.x, transform.position.y);
                     tripleShotLaser.transform.rotation = Quaternion.Euler(0, 0, 0);
                     tripleShotLaser.SetActive(true);
-                    
+                    tripleShotLaser.transform.GetChild(0).gameObject.SetActive(true);
+                    tripleShotLaser.transform.GetChild(1).gameObject.SetActive(true);
+                    tripleShotLaser.transform.GetChild(2).gameObject.SetActive(true);
+
                 }
             }
             else
@@ -184,30 +187,31 @@ public class Player : MonoBehaviour
     private void TripleShotActive()
     {
         _tripleShotActive = true;
-        StartCoroutine(Timer(_powerCooldown,_tripleShotActive));
+        StartCoroutine(TripleShotTimer(_powerCooldown));
        
     }
     private void SpeedBoostActive()
     {
+        
         _speedBoost = true;
         _speed = 10;
         _thusters[2].SetActive(true);
-        StartCoroutine(Timer(_powerCooldown,_speedBoost));
+        StartCoroutine(SpeedBoostTimer(_powerCooldown));
     }
-    IEnumerator Timer(float timer , bool powerUp)
+    IEnumerator SpeedBoostTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
 
-        if (powerUp == _speedBoost)
-        {
-            _thusters[2].SetActive(false);
-            _speed = 5;
-            _speedBoost = false;
-        }
-       else if (powerUp == _tripleShotActive)
-        {
-            _tripleShotActive = false;
-        }
+        _thusters[2].SetActive(false);
+        _speed = 5;
+        _speedBoost = false;
+    }
+    IEnumerator TripleShotTimer(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+
+        _tripleShotActive = false;
+        
     }
     public void UpdateScore()
     {

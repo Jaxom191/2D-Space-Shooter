@@ -29,7 +29,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
             {
                 enemy.transform.position = new Vector2(Random.Range(-9f, 9f), 7f);
                 enemy.transform.rotation = transform.rotation;
-                yield return new WaitForSeconds(Random.Range(1.5f, 4.0f));
+                yield return new WaitForSeconds(Random.Range(1.0f, 3.0f));
                 enemy.SetActive(true);
                 
             }
@@ -57,7 +57,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
             {
                 powerUp.transform.position = new Vector2(Random.Range(-9f, 9f), 7f);
                 powerUp.transform.rotation = transform.rotation;
-                yield return new WaitForSeconds(Random.Range(2.0f, 5.0f));
+                yield return new WaitForSeconds(Random.Range(3.0f, 5.0f));
                 powerUp.SetActive(true);
                 
             }
